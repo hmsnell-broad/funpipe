@@ -28,7 +28,7 @@ sub output_tsv{
   open (OUT, "+>$output") || die "can't open out file\n";
   print OUT join("\t", qw(chr start0 end0 id depth fc)), "\n";
   foreach my $currContig (sort keys %$chrDep) {
-    foreach my $currSliWin (sort {$a <=> $b} keys $$chrDep{$currContig}) {
+    foreach my $currSliWin (sort {$a <=> $b} keys %{$$chrDep{$currContig}}) {
       my $currWin = get_curr_win($currSliWin, $winSize);
       print OUT sprintf("%s\t%d\t%d\t%s\t%.2f\t%.2f\n", $currContig, $currWin,
                         $currWin + $winSize, $currContig.'_'.$currSliWin,
